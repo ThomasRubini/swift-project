@@ -10,5 +10,8 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .executableTarget(
             name: "git-swift"),
+        .testTarget(
+            name: "git-swiftTests",
+            dependencies: ["git-swift"]),
     ]
 )
