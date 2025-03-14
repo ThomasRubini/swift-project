@@ -7,7 +7,6 @@ enum TaskState: String {
 }
 
 protocol TaskProtocol {
-    var id: Int { get set }
     var title: String { get set }
     var description: String { get set }
     var priority: Int { get set }
@@ -17,7 +16,6 @@ protocol TaskProtocol {
 }
 
 struct Task : TaskProtocol {
-    var id: Int                     
     var title: String              
     var description: String        
     var priority: Int              
@@ -25,8 +23,7 @@ struct Task : TaskProtocol {
     var estimatedTime: Double       
     var state: TaskState             
 
-    init(id: Int, title: String, description: String, priority: Int, requiredRAM: Int, estimatedTime: Double, state: TaskState = .todo) {
-        self.id = id
+    init(title: String, description: String, priority: Int, requiredRAM: Int, estimatedTime: Double, state: TaskState = .todo) {
         self.title = title
         self.description = description
         self.priority = priority
