@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "git-swift",
+    name: "swift-project",
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .executableTarget(
-            name: "git-swift"),
+            name: "swift-project"),
         .testTarget(
-            name: "git-swiftTests",
-            dependencies: ["git-swift"]),
+            name: "swift-projectTests",
+            dependencies: ["swift-project"]),
     ]
 )

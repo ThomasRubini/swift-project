@@ -1,5 +1,5 @@
-# git-swift
-An implementation of git in swift
+# swift-project
+Idk
 
 ## Development
 
