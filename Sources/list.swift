@@ -16,4 +16,14 @@ class LinkedList {
         self.head = nil
         self.tail = nil
     }
+
+    func addTask(_ task: Task) {
+        let newNode = LinkedListNode(task: task)
+        if let tail = tail {
+            tail.next = newNode
+        } else {
+            head = newNode
+        }
+        tail = newNode
+    }
 }
