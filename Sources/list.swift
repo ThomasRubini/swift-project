@@ -1,24 +1,35 @@
-class LinkedListNode {
-    var task: Task
+protocol LinkedListProtocol {
+    associatedtype Element: Equatable
+
+    var head: LinkedListNode<Element>? { get set }
+    var tail: LinkedListNode<Element>? { get set }
+
+    func add(_ t: Element)
+}
+
+class LinkedListNode<T: Equatable> {
+    var item: T
     var next: LinkedListNode?
 
-    init(task: Task) {
-        self.task = task
+    init(item: T) {
+        self.item = item
         self.next = nil
     }
 }
 
-class LinkedList {
-    var head: LinkedListNode?
-    var tail: LinkedListNode?
+class LinkedList<T: Equatable>: LinkedListProtocol{
+    typealias Element = T
+
+    var head: LinkedListNode<T>?
+    var tail: LinkedListNode<T>?
 
     init() {
         self.head = nil
         self.tail = nil
     }
 
-    func addTask(_ task: Task) {
-        let newNode = LinkedListNode(task: task)
+    func add(_ t: Element) {
+        let newNode = LinkedListNode(item: t)
         if let tail = tail {
             tail.next = newNode
         } else {
@@ -27,12 +38,12 @@ class LinkedList {
         tail = newNode
     }
 
-    func deleteTaskFromId(by title: String) -> Bool {
+    func deleteItem(t: Element) -> Bool {
         var current = head
-        var previous: LinkedListNode?
+        var previous: LinkedListNode<T>?
 
         while let node = current {
-            if node.task.title == title {
+            if node.item == t {
                 if node === head {
                     head = node.next
                     if node === tail {
@@ -52,16 +63,6 @@ class LinkedList {
         return false
     }
 
-    func updateTaskState(by title: String, newState: TaskState) -> Bool {
-        var currentNode = head
-        
-        while let node = currentNode {
-            if node.task.title == title {
-                node.task.state = newState
-                return true
-            }
-            currentNode = node.next
-        }
-        return false
-    }
+    
 }
+
