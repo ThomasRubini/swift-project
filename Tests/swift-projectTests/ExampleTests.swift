@@ -20,7 +20,7 @@ struct DemoTests {
         linkedList.addTask(task)
 
         guard let headTask = linkedList.head?.task else {
-            #expect(false, "La tête de la liste ne devrait pas être nil après l'ajout d'une tâche.")
+            #expect(Bool(false), "La tête de la liste ne devrait pas être nil après l'ajout d'une tâche.")
             return
         }
 
