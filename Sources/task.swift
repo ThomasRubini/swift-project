@@ -6,7 +6,7 @@ enum TaskState: String {
     case completed = "terminée"
 }
 
-protocol TaskProtocol: Task {
+protocol TaskProtocol {
     var id: Int { get set }
     var title: String { get set }
     var description: String { get set }
@@ -16,7 +16,7 @@ protocol TaskProtocol: Task {
     var state: TaskState { get set }
 }
 
-struct Task {
+struct Task : TaskProtocol {
     var id: Int                     
     var title: String              
     var description: String        
