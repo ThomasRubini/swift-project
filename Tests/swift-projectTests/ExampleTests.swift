@@ -52,4 +52,22 @@ struct DemoTests {
         let failedDelete = linkedList.deleteTaskFromId(by: task1.title)
         #expect(!failedDelete, "Supprimer une tâche déjà supprimée devrait retourner false.")
     }
+
+    @Test
+    func testUpdateTaskState() {
+        let linkedList = LinkedList()
+
+        let task = Task(title: "Tâche à modifier", description: "Desc modifiable", priority: 3, requiredRAM: 512, estimatedTime: 90, state: .todo)
+        linkedList.addTask(task)
+
+        let updateResult = linkedList.updateTaskState(by: task.title, newState: .completed)
+        #expect(updateResult, "La mise à jour de l'état devrait être réussie.")
+
+        guard let updatedTask = linkedList.head?.task else {
+            #expect(Bool(false), "La liste ne devrait pas être vide après la mise à jour d'une tâche.")
+            return
+        }
+
+        #expect(updatedTask.state == .completed, "L'état de la tâche devrait être mis à jour à 'completed'.")
+    }
 }

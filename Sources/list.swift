@@ -51,4 +51,17 @@ class LinkedList {
         }
         return false
     }
+
+    func updateTaskState(by title: String, newState: TaskState) -> Bool {
+        var currentNode = head
+        
+        while let node = currentNode {
+            if node.task.title == title {
+                node.task.state = newState
+                return true
+            }
+            currentNode = node.next
+        }
+        return false
+    }
 }
