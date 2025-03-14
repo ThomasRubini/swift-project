@@ -26,4 +26,29 @@ class LinkedList {
         }
         tail = newNode
     }
+
+    func deleteTaskFromId(by title: String) -> Bool {
+        var current = head
+        var previous: LinkedListNode?
+
+        while let node = current {
+            if node.task.title == title {
+                if node === head {
+                    head = node.next
+                    if node === tail {
+                        tail = nil
+                    }
+                } else if node === tail {
+                    tail = previous
+                    tail?.next = nil
+                } else {
+                    previous?.next = node.next
+                }
+                return true
+            }
+            previous = current
+            current = node.next
+        }
+        return false
+    }
 }
