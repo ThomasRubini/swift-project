@@ -38,7 +38,21 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         tail = newNode
     }
 
-    func deleteItem(t: Element) -> Bool {
+    func get(_ index: Int) -> T? {
+        var current = head
+        var currentIndex = 0
+
+        while let node = current {
+            if currentIndex == index {
+                return node.item
+            }
+            current = node.next
+            currentIndex += 1
+        }
+        return nil
+    }
+
+    func delete(_ t: Element) -> Bool {
         var current = head
         var previous: LinkedListNode<T>?
 
@@ -63,6 +77,14 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         return false
     }
 
-    
-}
+    func len() -> Int {
+        var count = 0
+        var current = head
 
+        while let node = current {
+            count += 1
+            current = node.next
+        }
+        return count
+    }
+}
