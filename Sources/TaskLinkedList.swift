@@ -36,4 +36,20 @@ class TaskLinkedList: LinkedList<Task> {
             current = current?.next
         }
     }
+
+    func orderedInsert(_ task: Task) {
+        if self.head == nil || self.head?.item.priority ?? 0 > task.priority {
+            self.add(task)
+            return
+        }
+
+        var current = self.head
+        while current?.next != nil && current?.next?.item.priority ?? 0 < task.priority {
+            current = current?.next
+        }
+
+        let newNode = LinkedListNode(item: task)
+        newNode.next = current?.next
+        current?.next = newNode
+    }
 }
