@@ -50,14 +50,11 @@ class LinkedList<T: Equatable>: Sequence {
     }
 
     func get(_ index: Int) -> T? {
-        var current = head
         var currentIndex = 0
-
-        while let node = current {
+        for node in self {
             if currentIndex == index {
-                return node.item
+                return node
             }
-            current = node.next
             currentIndex += 1
         }
         return nil
@@ -123,12 +120,10 @@ class LinkedList<T: Equatable>: Sequence {
 
     func len() -> Int {
         var count = 0
-        var current = head
-
-        while let node = current {
+        for _ in self {
             count += 1
-            current = node.next
         }
+
         return count
     }
 

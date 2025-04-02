@@ -26,7 +26,7 @@ class TaskLinkedList: LinkedList<Task>, TaskLinkedListProtocol {
     }
 
     func orderedInsert(_ newTask: Task) {
-        if self.head == nil || self.head!.item.priority > newTask.priority {
+        if self.len() == 0 || self.head!.item.priority > newTask.priority {
             let newHead = LinkedListNode(item: newTask)
             newHead.next = self.head
             self.head = newHead
