@@ -6,7 +6,7 @@ enum TaskState: String {
     case completed = "terminée"
 }
 
-struct Task : Equatable {
+class Task : Equatable {
     var title: String              
     var description: String        
     var priority: Int              
