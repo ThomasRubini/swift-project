@@ -3,6 +3,6 @@ Idk
 
 ## Development
 
-Run the project using `swift run`
+Run the project using `swift run swift-project [subcommand]`
 
 Run tests with `swift test`
