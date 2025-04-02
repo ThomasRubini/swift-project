@@ -77,8 +77,7 @@ struct TaskLinkedListTests {
 
         linkedList.sortTasks()
 
-        #expect(linkedList.get(0)?.title == "Task 2", "First task should be Task 2 after sorting.")
-        #expect(linkedList.get(1)?.title == "Task 3", "Second task should be Task 3 after sorting.")
-        #expect(linkedList.get(2)?.title == "Task 1", "Third task should be Task 1 after sorting.")
+        #expect(linkedList.get(0)!.priority < linkedList.get(1)!.priority, "First task should have the highest priority.")
+        #expect(linkedList.get(1)!.priority < linkedList.get(2)!.priority, "Second task should have the second highest priority.")
     }
 }

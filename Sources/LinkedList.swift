@@ -128,4 +128,26 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         }
         return nil
     }
+
+    func sortTasks(_ predicate: (T, T) -> Bool) {
+        var current = self.head
+        while current != nil {
+            var maxNode = current
+            var searchNode = current?.next
+
+            while searchNode != nil {
+                if predicate(searchNode!.item, maxNode!.item) {
+                    maxNode = searchNode
+                }
+                searchNode = searchNode?.next
+            }
+
+            if let currentTask = current?.item, let maxTask = maxNode?.item {
+                current?.item = maxTask
+                maxNode?.item = currentTask
+            }
+
+            current = current?.next
+        }
+    }
 }
