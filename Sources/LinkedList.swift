@@ -27,7 +27,7 @@ struct LinkedListIterator<T: Equatable>: IteratorProtocol {
 }
 
 
-class LinkedList<T: Equatable>: Sequence{
+class LinkedList<T: Equatable>: Sequence {
 
     typealias Element = T
 

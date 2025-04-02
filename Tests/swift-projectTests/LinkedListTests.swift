@@ -122,5 +122,26 @@ struct LinkedListTests {
         }
         #expect(0 == n_elements)
     }
+
+    @Test
+    func testIteratorValues() async throws {
+        let linkedList = LinkedList<String>()
+
+        linkedList.add("Hello")
+        linkedList.add("World")
+
+        var n_elements = 0
+        for elem in linkedList {
+            if n_elements == 0 {
+                #expect(elem == "Hello")
+            } else if n_elements == 1 {
+                #expect(elem == "World")
+            } else {
+                #expect(Bool(false), "Unexpected element: \(elem)")
+            }
+            n_elements += 1
+        }
+        #expect(2 == n_elements)
+    }
 }
 
