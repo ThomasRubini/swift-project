@@ -79,6 +79,7 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         }
         return false
     }
+
     func deleteByValue(_ t: Element) -> Bool {
         var current = head
         var previous: LinkedListNode<T>?
