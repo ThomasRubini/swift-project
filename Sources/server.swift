@@ -1,12 +1,13 @@
+import Foundation
+
 protocol ServerProtocol {
     var id: Int { get set }
     var availableRAM: Int { get set }
     var allocatedTasks: [Task] { get set }
 
-    mutating func allocate(task: Task) -> Bool
 }
 
-struct Server: ServerProtocol {
+class Server: ServerProtocol {
     var id: Int
     var availableRAM: Int
     var allocatedTasks: [Task]
@@ -17,10 +18,59 @@ struct Server: ServerProtocol {
         self.allocatedTasks = []
     }
 
-    mutating func allocate(task: Task) -> Bool {
-        guard task.requiredRAM <= availableRAM else { return false }
-        allocatedTasks.append(task)
-        availableRAM -= task.requiredRAM
-        return true
+
+    func allocate(from taskList: TaskLinkedList) {
+        var tasksArray: [Task] = []
+        var current = taskList.head
+
+        while current != nil {
+            let task = current!.item
+            if task.state == TaskState.todo {
+                tasksArray.append(task)
+            }
+            current = current?.next
+        }
+
+        let n = tasksArray.count
+        let maxRAM = availableRAM
+        if n == 0 || maxRAM == 0 {
+            allocatedTasks = []
+            return
+        }
+
+        // DP table
+        var dp = Array(repeating: Array(repeating: 0, count: maxRAM + 1), count: n + 1)
+
+        for i in 1...n {
+            let ram = tasksArray[i - 1].requiredRAM
+            for w in 0...maxRAM {
+                if ram <= w {
+                    dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - ram] + ram)
+                } else {
+                    dp[i][w] = dp[i - 1][w]
+                }
+            }
+        }
+
+        // Reconstruction
+        var w = maxRAM
+        var selectedTasks: [Task] = []
+
+        for i in stride(from: n, through: 1, by: -1) {
+            if dp[i][w] != dp[i - 1][w] {
+                let task = tasksArray[i - 1]
+                selectedTasks.append(task)
+                w -= task.requiredRAM
+            }
+        }
+
+        // Marquer comme en cours
+        for task in selectedTasks {
+            task.state = TaskState.inProgress
+        }
+
+        self.allocatedTasks = selectedTasks
     }
+
+
 }
