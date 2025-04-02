@@ -94,4 +94,30 @@ struct LinkedListTests {
         let notFoundElement = linkedList.findWhere { $0 == "NotInList" }
         #expect(notFoundElement == nil, "Should return nil for not found element.")
     }
+
+    @Test
+    func testIteratorLength() async throws {
+        let linkedList = LinkedList<String>()
+
+        linkedList.add("Hello")
+        linkedList.add("World")
+
+        var n_elements = 0
+        for _ in linkedList {
+            n_elements += 1
+        }
+        #expect(linkedList.len() == n_elements)
+    }
+    
+    @Test
+    func testIteratorEmpty() async throws {
+        let linkedList = LinkedList<String>()
+
+        var n_elements = 0
+        for _ in linkedList {
+            n_elements += 1
+        }
+        #expect(0 == n_elements)
+    }
 }
+

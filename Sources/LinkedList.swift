@@ -1,6 +1,4 @@
-protocol LinkedListProtocol {
-    associatedtype Element: Equatable
-
+protocol LinkedListProtocol: Sequence where Element: Equatable {
     var head: LinkedListNode<Element>? { get set }
     var tail: LinkedListNode<Element>? { get set }
 
@@ -17,7 +15,27 @@ class LinkedListNode<T: Equatable> {
     }
 }
 
-class LinkedList<T: Equatable>: LinkedListProtocol{
+struct LinkedListIterator<T: Equatable>: IteratorProtocol {
+    let list: LinkedList<T>
+    var nextNode: LinkedListNode<T>?
+
+
+    init(_ list: LinkedList<T>) {
+        self.list = list
+        self.nextNode = list.head
+    }
+
+
+    mutating func next() -> T? {
+        let current: T? = nextNode?.item
+        nextNode = nextNode?.next
+        return current
+    }
+}
+
+
+class LinkedList<T: Equatable>: LinkedListProtocol, Sequence{
+
     typealias Element = T
 
     var head: LinkedListNode<T>?
@@ -50,6 +68,10 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
             currentIndex += 1
         }
         return nil
+    }
+
+    func makeIterator() -> LinkedListIterator<T> {
+        return LinkedListIterator(self)
     }
 
     func deleteByIndex(_ index: Int) -> Bool {
