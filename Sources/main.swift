@@ -27,8 +27,10 @@ func generateRandomTasks(count: Int) -> TaskLinkedList {
 
 func perf_csv() {
     print("count,ms")
+
+    let samples = stride(from: 0, through: 10000, by: 500).map { $0 }
     
-    for count in [10, 100, 200, 300, 500, 750, 1000, 2000, 3000, 10000] {
+    for count in samples {
         let taskList = generateRandomTasks(count: count)
         let startTime = Date()
         taskList.sortTasks()
