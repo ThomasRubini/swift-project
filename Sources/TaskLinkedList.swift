@@ -1,7 +1,7 @@
 protocol TaskLinkedListProtocol: Sequence<Task> {
     func addTask(_ e: Task)
     func deleteFromId(_ id: Int) -> Bool
-    func updateState(by title: String, newState: TaskState) -> Bool
+    func updateState(title: String, newState: TaskState) -> Bool
     func sortTasks()
     func orderedInsert(_ newTask: Task)
 }
@@ -15,7 +15,7 @@ class TaskLinkedList: LinkedList<Task>, TaskLinkedListProtocol {
         return self.deleteByIndex(id)
     }
 
-    func updateState(by title: String, newState: TaskState) -> Bool {
+    func updateState(title: String, newState: TaskState) -> Bool {
         let res = self.findWhere { $0.title == title }
         res?.state = newState
         return res != nil
