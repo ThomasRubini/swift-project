@@ -59,16 +59,17 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         var currentIndex = 0
 
         while let node = current {
+            // Is it the right index?
             if currentIndex == index {
-                if node === head {
+                if node === head { // if head
                     head = node.next
                     if node === tail {
                         tail = nil
                     }
-                } else if node === tail {
+                } else if node === tail { // if tail
                     tail = previous
                     tail?.next = nil
-                } else {
+                } else { // in the middle
                     previous?.next = node.next
                 }
                 return true
