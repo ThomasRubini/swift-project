@@ -23,7 +23,7 @@ struct TaskLinkedListTests {
     }
 
     @Test
-    func testUpdateTaskState() {
+    func testupdateState() {
         let linkedList = TaskLinkedList()
 
         let task = Task(
@@ -37,7 +37,7 @@ struct TaskLinkedListTests {
 
         linkedList.add(task)
 
-        #expect(linkedList.updateTaskState(by: "Test task", newState: .inProgress), "Task state should be updated.")
+        #expect(linkedList.updateState(by: "Test task", newState: .inProgress), "Task state should be updated.")
         #expect(linkedList.get(0)?.state == .inProgress, "Task state should be inProgress.")
     }
 

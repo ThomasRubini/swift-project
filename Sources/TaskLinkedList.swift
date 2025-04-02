@@ -7,17 +7,10 @@ class TaskLinkedList: LinkedList<Task> {
         return self.deleteByIndex(id)
     }
 
-    func updateTaskState(by title: String, newState: TaskState) -> Bool {
-        var currentNode = self.head
-        
-        while let node = currentNode {
-            if node.item.title == title {
-                node.item.state = newState
-                return true
-            }
-            currentNode = node.next
-        }
-        return false
+    func updateState(by title: String, newState: TaskState) -> Bool {
+        var res = self.findWhere { $0.title == title }
+        res?.state = newState
+        return res != nil
     }
 
     func sortTasks() {
