@@ -2,7 +2,7 @@ import Testing
 @testable import swift_project
 
 @Suite
-struct DemoTests {
+struct TaskLinkedListTests {
     @Test
     func testAddTask() {
         let linkedList = LinkedList<Task>()
