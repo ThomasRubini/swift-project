@@ -8,7 +8,7 @@ class TaskLinkedList: LinkedList<Task> {
     }
 
     func updateState(by title: String, newState: TaskState) -> Bool {
-        var res = self.findWhere { $0.title == title }
+        let res = self.findWhere { $0.title == title }
         res?.state = newState
         return res != nil
     }
