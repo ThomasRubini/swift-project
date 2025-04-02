@@ -117,13 +117,6 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         return count
     }
 
-    func test() {
-        print("Testing LinkedList")
-        print("Head: \(String(describing: head?.item))")
-        print("Tail: \(String(describing: tail?.item))")
-        print("Length: \(len())")
-    }
-
     func findWhere(_ predicate: (T) -> Bool) -> T? {
         var current = head
 
