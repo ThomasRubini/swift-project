@@ -14,21 +14,23 @@ class TaskLinkedList: LinkedList<Task> {
     }
 
     func sortTasks() {
-        return self.sortTasks { $0.priority > $1.priority }
+        return self.sortTasks { $0.priority < $1.priority }
     }
 
-    func orderedInsert(_ task: Task) {
-        if self.head == nil || self.head?.item.priority ?? 0 > task.priority {
-            self.add(task)
+    func orderedInsert(_ newTask: Task) {
+        if self.head == nil || self.head!.item.priority > newTask.priority {
+            let newHead = LinkedListNode(item: newTask)
+            newHead.next = self.head
+            self.head = newHead
             return
         }
 
         var current = self.head
-        while current?.next != nil && current?.next?.item.priority ?? 0 < task.priority {
+        while current?.next != nil && current?.next?.item.priority ?? 0 < newTask.priority {
             current = current?.next
         }
 
-        let newNode = LinkedListNode(item: task)
+        let newNode = LinkedListNode(item: newTask)
         newNode.next = current?.next
         current?.next = newNode
     }

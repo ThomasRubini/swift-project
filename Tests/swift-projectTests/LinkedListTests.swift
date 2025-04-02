@@ -38,6 +38,7 @@ struct LinkedListTests {
         #expect(linkedList.get(1) == nil, "Second element should be nil after deletion.")
     }
 
+    @Test
     func testDeleteByIndex() {
         let linkedList = LinkedList<String>()
 
@@ -79,6 +80,8 @@ struct LinkedListTests {
         #expect(linkedList.get(2) == nil, "Third element should be nil.")
     }
 
+
+    @Test
     func testFindWhere() {
         let linkedList = LinkedList<String>()
 

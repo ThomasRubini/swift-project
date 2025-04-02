@@ -41,6 +41,7 @@ struct TaskLinkedListTests {
         #expect(linkedList.get(0)?.state == .inProgress, "Task state should be inProgress.")
     }
 
+    @Test
     func testSortTasks() {
         let linkedList = TaskLinkedList()
 
@@ -77,10 +78,12 @@ struct TaskLinkedListTests {
 
         linkedList.sortTasks()
 
+        #expect(linkedList.len() == 3, "List should contain three tasks after sorting.")
         #expect(linkedList.get(0)!.priority < linkedList.get(1)!.priority, "First task should have the highest priority.")
         #expect(linkedList.get(1)!.priority < linkedList.get(2)!.priority, "Second task should have the second highest priority.")
     }
 
+    @Test
     func testOrderedInsert() {
         let linkedList = TaskLinkedList()
 
@@ -115,6 +118,7 @@ struct TaskLinkedListTests {
         linkedList.orderedInsert(task2)
         linkedList.orderedInsert(task3)
 
+        #expect(linkedList.len() == 3, "List should contain three tasks after ordered insert.")
         #expect(linkedList.get(0) == task2, "First task should be Task 2.")
         #expect(linkedList.get(1) == task3, "Second task should be Task 3.")
         #expect(linkedList.get(2) == task1, "Third task should be Task 1.")
