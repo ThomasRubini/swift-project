@@ -14,27 +14,7 @@ class TaskLinkedList: LinkedList<Task> {
     }
 
     func sortTasks() {
-        var current = self.head
-
-        while current != nil {
-            var maxNode = current
-            var searchNode = current?.next
-
-            while searchNode != nil {
-                if let searchPriority = searchNode?.item.priority, let maxPriority = maxNode?.item.priority,
-                   searchPriority < maxPriority {
-                    maxNode = searchNode
-                }
-                searchNode = searchNode?.next
-            }
-
-            if let currentTask = current?.item, let maxTask = maxNode?.item {
-                current?.item = maxTask
-                maxNode?.item = currentTask
-            }
-
-            current = current?.next
-        }
+        return self.sortTasks { $0.priority > $1.priority }
     }
 
     func orderedInsert(_ task: Task) {
