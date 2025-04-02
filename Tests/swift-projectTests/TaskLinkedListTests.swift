@@ -23,7 +23,7 @@ struct TaskLinkedListTests {
     }
 
     @Test
-    func testupdateState() {
+    func testUpdateState() {
         let linkedList = TaskLinkedList()
 
         let task = Task(
