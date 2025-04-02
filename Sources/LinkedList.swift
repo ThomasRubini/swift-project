@@ -4,7 +4,7 @@ protocol LinkedListProtocol {
     var head: LinkedListNode<Element>? { get set }
     var tail: LinkedListNode<Element>? { get set }
 
-    func add(_ t: Element)
+    func add(_ e: Element)
 }
 
 class LinkedListNode<T: Equatable> {
@@ -28,8 +28,8 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         self.tail = nil
     }
 
-    func add(_ t: Element) {
-        let newNode = LinkedListNode(item: t)
+    func add(_ e: Element) {
+        let newNode = LinkedListNode(item: e)
         if let tail = tail {
             tail.next = newNode
         } else {
@@ -81,12 +81,12 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         return false
     }
 
-    func deleteByValue(_ t: Element) -> Bool {
+    func deleteByValue(_ e: Element) -> Bool {
         var current = head
         var previous: LinkedListNode<T>?
 
         while let node = current {
-            if node.item == t {
+            if node.item == e {
                 if node === head {
                     head = node.next
                     if node === tail {
