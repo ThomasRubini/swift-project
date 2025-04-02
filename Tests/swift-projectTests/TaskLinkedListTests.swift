@@ -5,7 +5,7 @@ import Testing
 struct TaskLinkedListTests {
     @Test
     func testAddTask() {
-        let linkedList = LinkedList<Task>()
+        let linkedList = TaskLinkedList()
 
         let task = Task(
             title: "Test task",

@@ -1,4 +1,4 @@
-class TaskList: LinkedList<Task> {
+class TaskLinkedList: LinkedList<Task> {
     func addTask(_ task: Task) {
         self.add(task)
     }
