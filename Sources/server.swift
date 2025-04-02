@@ -19,16 +19,14 @@ class Server: ServerProtocol {
     }
 
 
-    func allocate(from taskList: TaskLinkedList) {
+    func allocate(from taskList: any TaskLinkedListProtocol) {
         var tasksArray: [Task] = []
-        var current = taskList.head
 
-        while current != nil {
-            let task = current!.item
+        // Collect all tasks in the todo state
+        for task in taskList {
             if task.state == TaskState.todo {
                 tasksArray.append(task)
             }
-            current = current?.next
         }
 
         let n = tasksArray.count

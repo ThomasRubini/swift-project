@@ -142,7 +142,7 @@ struct ServerAllocationTests {
 
     @Test
     func testPartialAllocationStillValid() {
-        let list = TaskLinkedList()
+        let list: TaskLinkedListProtocol = TaskLinkedList()
         let taskA = Task(
             title: "A", 
             description: "", 

@@ -1,4 +1,12 @@
-class TaskLinkedList: LinkedList<Task> {
+protocol TaskLinkedListProtocol: Sequence<Task> {
+    func addTask(_ e: Task)
+    func deleteFromId(_ id: Int) -> Bool
+    func updateState(by title: String, newState: TaskState) -> Bool
+    func sortTasks()
+    func orderedInsert(_ newTask: Task)
+}
+
+class TaskLinkedList: LinkedList<Task>, TaskLinkedListProtocol {
     func addTask(_ task: Task) {
         self.add(task)
     }

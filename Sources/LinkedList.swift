@@ -1,10 +1,3 @@
-protocol LinkedListProtocol: Sequence where Element: Equatable {
-    var head: LinkedListNode<Element>? { get set }
-    var tail: LinkedListNode<Element>? { get set }
-
-    func add(_ e: Element)
-}
-
 class LinkedListNode<T: Equatable> {
     var item: T
     var next: LinkedListNode?
@@ -34,7 +27,7 @@ struct LinkedListIterator<T: Equatable>: IteratorProtocol {
 }
 
 
-class LinkedList<T: Equatable>: LinkedListProtocol, Sequence{
+class LinkedList<T: Equatable>: Sequence{
 
     typealias Element = T
 
