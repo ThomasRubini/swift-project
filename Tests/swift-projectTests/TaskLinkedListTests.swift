@@ -8,8 +8,8 @@ struct DemoTests {
         let linkedList = LinkedList<Task>()
 
         let task = Task(
-            title: "Tâche Test",
-            description: "Description test",
+            title: "Test task",
+            description: "Test description",
             priority: 5,
             requiredRAM: 256,
             estimatedTime: 120,
@@ -18,11 +18,7 @@ struct DemoTests {
 
         linkedList.add(task)
 
-        guard let headTask = linkedList.head else {
-            #expect(Bool(false), "La tête de la liste ne devrait pas être nil après l'ajout d'une tâche.")
-            return
-        }
-
-        #expect(linkedList.head?.next == nil)
+        #expect(linkedList.len() == 1, "List should contain one task after adding.")
+        #expect(linkedList.get(0) == task, "First task should be the one added.")
     }
 }

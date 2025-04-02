@@ -1,4 +1,8 @@
 class TaskList: LinkedList<Task> {
+    func addTask(_ task: Task) {
+        self.add(task)
+    }
+
     func updateTaskState(by title: String, newState: TaskState) -> Bool {
         var currentNode = self.head
         
