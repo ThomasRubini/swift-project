@@ -10,6 +10,8 @@ Run tests with `swift test`
 # Questions
 
 ## Question 7
+Table de résultats obtenus:
+```
 Element count	Observed time
 0	0
 500	12
@@ -32,6 +34,7 @@ Element count	Observed time
 9000	4900
 9500	5661
 10,000.00	5934
+```
 
 ![Courbe de complexité expérimentale](img/fig1.png)
 
