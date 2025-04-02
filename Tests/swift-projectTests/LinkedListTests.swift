@@ -4,18 +4,21 @@ import Testing
 @Suite
 struct LinkedListTests {
     @Test
-    func testAdd() {
+    func testEmptyList() {
+        let linkedList = LinkedList<String>()
+
+        #expect(linkedList.len() == 0, "List should be empty initially.")
+        #expect(linkedList.get(0) == nil, "Getting an element from an empty list should return nil.")
+    }
+
+    @Test
+    func testAddAndGet() {
         let linkedList = LinkedList<String>()
 
         linkedList.add("Hello")
 
-        guard let headTask = linkedList.head else {
-            #expect(Bool(false), "List head should not be nil after adding element.")
-            return
-        }
-
-        #expect(linkedList.head?.next == nil)
-        #expect(linkedList.head?.item == "Hello")
+        #expect(linkedList.len() == 1, "List should contain one element after adding.")
+        #expect(linkedList.get(0) == "Hello", "First element should be 'Hello'.")
     }
 
     @Test
@@ -25,15 +28,38 @@ struct LinkedListTests {
         linkedList.add("Hello")
         linkedList.add("World")
 
+        #expect(linkedList.len() == 2, "List should contain two elements after adding.")
+
         let deleteResult = linkedList.delete("Hello")
         #expect(deleteResult, "Element should be deleted successfully.")
 
-        guard let headTask = linkedList.head else {
-            #expect(Bool(false), "List should not be empty after deleting an element.")
-            return
-        }
+        #expect(linkedList.len() == 1, "List should contain one element after deletion.")
+        #expect(linkedList.get(0) == "World", "First element should be 'World' after deletion.")
+        #expect(linkedList.get(1) == nil, "Second element should be nil after deletion.")
+    }
 
-        #expect(headTask.item == "World", "List head should be the second element after deleting the first.")
-        #expect(linkedList.head?.next == nil, "There should be only one element left after deleting.")
+    @Test
+    func testComplete() {
+        let linkedList = LinkedList<String>()
+
+        linkedList.add("Hello")
+        linkedList.add("World")
+
+        #expect(linkedList.len() == 2, "List should contain three elements after adding.")
+        #expect(linkedList.get(0) == "Hello", "First element should be 'Hello'.")
+        #expect(linkedList.get(1) == "World", "Second element should be 'World'.")
+        #expect(linkedList.get(2) == nil, "Third element should be nil.")
+
+        let deleteResult = linkedList.delete("Hello")
+        #expect(deleteResult, "Element should be deleted successfully.")
+        #expect(linkedList.len() == 1, "List should contain two elements after deletion.")
+        #expect(linkedList.get(0) == "World", "First element should be 'World' after deletion.")
+        #expect(linkedList.get(1) == nil, "Second element should be nil after deletion.")
+
+        linkedList.add("Swift")
+        #expect(linkedList.len() == 2, "List should contain three elements after adding.")
+        #expect(linkedList.get(0) == "World", "First element should be 'Hello'.")
+        #expect(linkedList.get(1) == "Swift", "Second element should be 'Swift'.")
+        #expect(linkedList.get(2) == nil, "Third element should be nil.")
     }
 }
