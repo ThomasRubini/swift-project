@@ -31,6 +31,7 @@ class Server: ServerProtocol {
 
         let n = tasksArray.count
         let maxRAM = availableRAM
+        // Handle special case
         if n == 0 || maxRAM == 0 {
             allocatedTasks = []
             return
