@@ -3,6 +3,10 @@ class TaskLinkedList: LinkedList<Task> {
         self.add(task)
     }
 
+    func deleteFromId(_ id: Int) -> Bool {
+        return self.deleteByIndex(id)
+    }
+
     func updateTaskState(by title: String, newState: TaskState) -> Bool {
         var currentNode = self.head
         
