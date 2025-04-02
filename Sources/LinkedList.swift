@@ -52,7 +52,34 @@ class LinkedList<T: Equatable>: LinkedListProtocol{
         return nil
     }
 
-    func delete(_ t: Element) -> Bool {
+    func deleteByIndex(_ index: Int) -> Bool {
+        guard index >= 0 else { return false }
+        var current = head
+        var previous: LinkedListNode<T>?
+        var currentIndex = 0
+
+        while let node = current {
+            if currentIndex == index {
+                if node === head {
+                    head = node.next
+                    if node === tail {
+                        tail = nil
+                    }
+                } else if node === tail {
+                    tail = previous
+                    tail?.next = nil
+                } else {
+                    previous?.next = node.next
+                }
+                return true
+            }
+            previous = current
+            current = node.next
+            currentIndex += 1
+        }
+        return false
+    }
+    func deleteByValue(_ t: Element) -> Bool {
         var current = head
         var previous: LinkedListNode<T>?
 

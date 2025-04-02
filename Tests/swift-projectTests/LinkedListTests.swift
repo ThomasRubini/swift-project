@@ -22,7 +22,7 @@ struct LinkedListTests {
     }
 
     @Test
-    func testDelete() {
+    func testdeleteByValue() {
         let linkedList = LinkedList<String>()
 
         linkedList.add("Hello")
@@ -30,7 +30,7 @@ struct LinkedListTests {
 
         #expect(linkedList.len() == 2, "List should contain two elements after adding.")
 
-        let deleteResult = linkedList.delete("Hello")
+        let deleteResult = linkedList.deleteByValue("Hello")
         #expect(deleteResult, "Element should be deleted successfully.")
 
         #expect(linkedList.len() == 1, "List should contain one element after deletion.")
@@ -50,7 +50,7 @@ struct LinkedListTests {
         #expect(linkedList.get(1) == "World", "Second element should be 'World'.")
         #expect(linkedList.get(2) == nil, "Third element should be nil.")
 
-        let deleteResult = linkedList.delete("Hello")
+        let deleteResult = linkedList.deleteByValue("Hello")
         #expect(deleteResult, "Element should be deleted successfully.")
         #expect(linkedList.len() == 1, "List should contain two elements after deletion.")
         #expect(linkedList.get(0) == "World", "First element should be 'World' after deletion.")
