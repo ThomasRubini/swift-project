@@ -1,6 +1,6 @@
 import Foundation
 
-enum TaskState: String {
+enum TaskState: String, CaseIterable {
     case todo = "à faire"
     case inProgress = "en cours"
     case completed = "terminée"
