@@ -78,4 +78,20 @@ struct LinkedListTests {
         #expect(linkedList.get(1) == "Swift", "Second element should be 'Swift'.")
         #expect(linkedList.get(2) == nil, "Third element should be nil.")
     }
+
+    func testFindWhere() {
+        let linkedList = LinkedList<String>()
+
+        linkedList.add("Hello")
+        linkedList.add("World")
+        linkedList.add("Swift")
+
+        #expect(linkedList.len() == 3, "List should contain three elements after adding.")
+
+        let foundElement = linkedList.findWhere { $0 == "World" }
+        #expect(foundElement == "World", "Found element should be 'World'.")
+
+        let notFoundElement = linkedList.findWhere { $0 == "NotInList" }
+        #expect(notFoundElement == nil, "Should return nil for not found element.")
+    }
 }
