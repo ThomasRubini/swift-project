@@ -139,6 +139,7 @@ class LinkedList<T: Equatable>: Sequence {
         return nil
     }
 
+    // Selection sort
     func sortTasks(_ predicate: (T, T) -> Bool) {
         var current = self.head
         while current != nil {
