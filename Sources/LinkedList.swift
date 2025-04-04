@@ -143,20 +143,21 @@ class LinkedList<T: Equatable>: Sequence {
     func sortTasks(_ predicate: (T, T) -> Bool) {
         var current = self.head
         while current != nil {
-            var maxNode = current
+            var minNode = current
             var searchNode = current?.next
 
+            // Search minimum element
             while searchNode != nil {
-                if predicate(searchNode!.item, maxNode!.item) {
-                    maxNode = searchNode
+                if predicate(searchNode!.item, minNode!.item) {
+                    minNode = searchNode
                 }
                 searchNode = searchNode?.next
             }
 
-            if let currentTask = current?.item, let maxTask = maxNode?.item {
-                current?.item = maxTask
-                maxNode?.item = currentTask
-            }
+            // Swap
+            let tmp = current!.item
+            current!.item = minNode!.item
+            minNode!.item = tmp
 
             current = current?.next
         }
