@@ -18,7 +18,7 @@ class Server: ServerProtocol {
         self.allocatedTasks = []
     }
 
-
+    // Allocate tasks to the server using a dynamic programming approach, to maximize the total RAM used (not the number of tasks allocated !)
     func allocate(from taskList: any TaskLinkedListProtocol) {
         var tasksArray: [Task] = []
 
@@ -29,35 +29,36 @@ class Server: ServerProtocol {
             }
         }
 
-        let tasksCount = tasksArray.count
         // Handle special case
-        if tasksCount == 0 || availableRAM == 0 {
+        if tasksArray.count == 0 || availableRAM == 0 {
             allocatedTasks = []
             return
         }
 
-        // DP table
-        var dp = Array(repeating: Array(repeating: 0, count: availableRAM + 1), count: tasksCount + 1)
+        // Build the DP table (precompute everything)
+        var dp = Array(repeating: Array(repeating: 0, count: availableRAM + 1), count: tasksArray.count + 1)
 
-        for task in 1...tasksCount {
+        for task in 1...tasksArray.count { // 
             let requiredRAM = tasksArray[task - 1].requiredRAM
-            for ramCapacity in 0...availableRAM {
-                if requiredRAM <= ramCapacity { // If the task can fit in the current capacity
+            for ramCapacity in 0...availableRAM { // simulate every possible capacity
+                if requiredRAM <= ramCapacity { // If the task can fit in the simulated capacity
+                    // Add it
                     dp[task][ramCapacity] = max(
                         dp[task - 1][ramCapacity],
                         dp[task - 1][ramCapacity - requiredRAM] + requiredRAM
                     )
                 } else {
+                    // Skip it
                     dp[task][ramCapacity] = dp[task - 1][ramCapacity]
                 }
             }
         }
 
-        // Reconstruction
+        // Reconstruct optimal solution from the DP table
         var w = availableRAM
         var selectedTasks: [Task] = []
 
-        for i in stride(from: tasksCount, through: 1, by: -1) {
+        for i in stride(from: tasksArray.count, through: 1, by: -1) {
             if dp[i][w] != dp[i - 1][w] {
                 let task = tasksArray[i - 1]
                 selectedTasks.append(task)
@@ -72,6 +73,4 @@ class Server: ServerProtocol {
 
         self.allocatedTasks = selectedTasks
     }
-
-
 }
