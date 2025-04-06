@@ -29,33 +29,32 @@ class Server: ServerProtocol {
             }
         }
 
-        let n = tasksArray.count
-        let maxRAM = availableRAM
+        let tasksCount = tasksArray.count
         // Handle special case
-        if n == 0 || maxRAM == 0 {
+        if tasksCount == 0 || availableRAM == 0 {
             allocatedTasks = []
             return
         }
 
         // DP table
-        var dp = Array(repeating: Array(repeating: 0, count: maxRAM + 1), count: n + 1)
+        var dp = Array(repeating: Array(repeating: 0, count: availableRAM + 1), count: tasksCount + 1)
 
-        for i in 1...n {
-            let ram = tasksArray[i - 1].requiredRAM
-            for w in 0...maxRAM {
-                if ram <= w {
-                    dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - ram] + ram)
+        for task in 1...tasksCount {
+            let requiredRAM = tasksArray[task - 1].requiredRAM
+            for ramCapacity in 0...availableRAM {
+                if requiredRAM <= ramCapacity { // If the task can fit in the current capacity
+                    dp[task][ramCapacity] = max(dp[task - 1][ramCapacity], dp[task - 1][ramCapacity - requiredRAM] + requiredRAM)
                 } else {
-                    dp[i][w] = dp[i - 1][w]
+                    dp[task][ramCapacity] = dp[task - 1][ramCapacity]
                 }
             }
         }
 
         // Reconstruction
-        var w = maxRAM
+        var w = availableRAM
         var selectedTasks: [Task] = []
 
-        for i in stride(from: n, through: 1, by: -1) {
+        for i in stride(from: tasksCount, through: 1, by: -1) {
             if dp[i][w] != dp[i - 1][w] {
                 let task = tasksArray[i - 1]
                 selectedTasks.append(task)
@@ -63,7 +62,7 @@ class Server: ServerProtocol {
             }
         }
 
-        // Marquer comme en cours
+        // Mark as in progress
         for task in selectedTasks {
             task.state = TaskState.inProgress
         }
