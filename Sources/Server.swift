@@ -43,7 +43,10 @@ class Server: ServerProtocol {
             let requiredRAM = tasksArray[task - 1].requiredRAM
             for ramCapacity in 0...availableRAM {
                 if requiredRAM <= ramCapacity { // If the task can fit in the current capacity
-                    dp[task][ramCapacity] = max(dp[task - 1][ramCapacity], dp[task - 1][ramCapacity - requiredRAM] + requiredRAM)
+                    dp[task][ramCapacity] = max(
+                        dp[task - 1][ramCapacity],
+                        dp[task - 1][ramCapacity - requiredRAM] + requiredRAM
+                    )
                 } else {
                     dp[task][ramCapacity] = dp[task - 1][ramCapacity]
                 }
