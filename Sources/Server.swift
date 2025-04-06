@@ -44,11 +44,11 @@ class Server: ServerProtocol {
                 if requiredRAM <= ramCapacity { // If the task can fit in the simulated capacity
                     // Add it
                     dp[task][ramCapacity] = max(
-                        dp[task - 1][ramCapacity],
-                        dp[task - 1][ramCapacity - requiredRAM] + requiredRAM
+                        dp[task - 1][ramCapacity], // Skip it because skipping it gives us more RAM 
+                        dp[task - 1][ramCapacity - requiredRAM] + requiredRAM // Add it because adding it gives us more RAM
                     )
                 } else {
-                    // Skip it
+                    // Skip it because we don't have enough RAM
                     dp[task][ramCapacity] = dp[task - 1][ramCapacity]
                 }
             }
