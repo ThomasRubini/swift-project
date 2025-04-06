@@ -38,6 +38,6 @@ Element count	Observed time
 
 ![Courbe de complexité expérimentale](img/fig1.png)
 
-On observe donc que le temps d'exécution est proportionnel à n^2, ce qui est compatible avec la complexité théorique de l'algorithme de tri par insertion.
+On observe donc que le temps d'exécution est proportionnel à n^2, ce qui est compatible avec la complexité théorique de l'algorithme de tri par selection.
 
 
