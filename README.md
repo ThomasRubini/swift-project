@@ -1,5 +1,9 @@
 # swift-project
-Idk
+
+## Authors
+Thomas RUBINI
+Ruben ROUVIERE
+Nathan DILHAN
 
 ## Development
 
